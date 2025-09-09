@@ -9,6 +9,17 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Trophy, QrCode, Users, TimerReset } from "lucide-react";
 import { QRCodeCanvas as QRCode } from "qrcode.react";
 import { motion } from "framer-motion";
+// ---- Types ----
+type Attempt = {
+  id: string;
+  eventId?: string;
+  name?: string;
+  email?: string | null;
+  score: number;
+  total: number;
+  durationMs: number;
+  createdAt?: { toDate?: () => Date }; // Firestore Timestamp wrapper
+};
 // --- Branding & event settings ---
 const QUIZ_TITLE = "Deep dive quiz";
 // Use your real logo URL (PNG/SVG). Example placeholder below:
@@ -158,7 +169,7 @@ function Header({ isHost }: { isHost: boolean }) {
 }
 
 function HostView() {
-  const [top, setTop] = useState<any[]>([]);
+  const [top, setTop] = useState<Attempt[]>([]);
 useEffect(() => {
   const q = query(
     collection(db, "attempts"),
@@ -169,8 +180,10 @@ useEffect(() => {
     limit(100)
   );
   const unsub = onSnapshot(q, (snap) => {
-    const rows: any[] = [];
-    snap.forEach((doc) => rows.push({ id: doc.id, ...doc.data() }));
+    const rows: Attempt[] = [];
+snap.forEach((doc) =>
+  rows.push({ id: doc.id, ...(doc.data() as Omit<Attempt, "id">) })
+);
     setTop(rows);
   });
   return () => unsub();
@@ -209,7 +222,7 @@ useEffect(() => {
   );
 }
 
-function LeaderboardTable({ rows }: { rows: any[] }) {
+function LeaderboardTable({ rows }: { rows: Attempt[] }) {
   return (
     <div className="overflow-auto">
       <Table>
