@@ -27,7 +27,7 @@ const LOGO_URL = "";
 
 // Change this string for each new run so the leaderboard separates by event.
 // Example: deep-dive-YYYY-MM-DD (no spaces)
-const EVENT_ID = "deep-dive-2025-09-03";
+const EVENT_ID = "deep-dive-2025-09-04";
 
 // Firebase
 import { initializeApp } from "firebase/app";
