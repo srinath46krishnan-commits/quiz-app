@@ -22,7 +22,8 @@ type Attempt = {
 };
 // --- Branding & event settings ---
 const QUIZ_TITLE = "Deep dive quiz";
-
+// Set to "" (empty) to hide the logo completely
+const LOGO_URL = "";
 
 // Change this string for each new run so the leaderboard separates by event.
 // Example: deep-dive-YYYY-MM-DD (no spaces)
@@ -416,6 +417,7 @@ if (submitted) {
               <p className="text-gray-600 mb-4">10 multiple choice questions. You will appear on the leaderboard after you submit.</p>
               <div className="grid gap-3">
                 <Input placeholder="Your full name, including initials" value={name} onChange={(e) => setName(e.target.value)} />
+                <Input placeholder="Email (optional)" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <Button
   className="w-full"
   onClick={async () => { if (await ensureUniqueName()) begin(); }}
@@ -427,12 +429,14 @@ if (submitted) {
               </div>
             </div>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="hidden md:block">
-              <img
-  alt="logo"
-  src={LOGO_URL}
-  className="rounded-2xl shadow max-h-40 object-contain bg-white p-4"
-/>
-            </motion.div>
+  {LOGO_URL && (
+    <img
+      alt="logo"
+      src={LOGO_URL}
+      className="rounded-2xl shadow max-h-40 object-contain bg-white p-4"
+    />
+  )}
+</motion.div>
           </div>
         </CardContent>
       </Card>
