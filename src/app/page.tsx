@@ -22,12 +22,11 @@ type Attempt = {
 };
 // --- Branding & event settings ---
 const QUIZ_TITLE = "Deep dive quiz";
-// Use your real logo URL (PNG/SVG). Example placeholder below:
-const LOGO_URL = "https://www.svgrepo.com/show/532474/scoreboard.svg";
+
 
 // Change this string for each new run so the leaderboard separates by event.
 // Example: deep-dive-YYYY-MM-DD (no spaces)
-const EVENT_ID = "deep-dive-2025-09-02";
+const EVENT_ID = "deep-dive-2025-09-03";
 
 // Firebase
 import { initializeApp } from "firebase/app";
@@ -414,10 +413,9 @@ if (submitted) {
           <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <h2 className="text-xl font-semibold mb-1">Welcome to the quiz</h2>
-              <p className="text-gray-600 mb-4">10 questions picked at random from 35. You will appear on the leaderboard after you submit.</p>
+              <p className="text-gray-600 mb-4">10 multiple choice questions. You will appear on the leaderboard after you submit.</p>
               <div className="grid gap-3">
-                <Input placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />
-                <Input placeholder="Email (optional)" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input placeholder="Your full name, including initials" value={name} onChange={(e) => setName(e.target.value)} />
                 <Button
   className="w-full"
   onClick={async () => { if (await ensureUniqueName()) begin(); }}
