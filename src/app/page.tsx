@@ -27,7 +27,7 @@ const LOGO_URL = "https://www.svgrepo.com/show/532474/scoreboard.svg";
 
 // Change this string for each new run so the leaderboard separates by event.
 // Example: deep-dive-YYYY-MM-DD (no spaces)
-const EVENT_ID = "deep-dive-2025-09-01";
+const EVENT_ID = "deep-dive-2025-09-02";
 
 // Firebase
 import { initializeApp } from "firebase/app";
